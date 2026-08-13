@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROSIMS - OSINT Intelligence Neural Mesh System</title>
+    <meta name="description" content="Research, Observation, Surveillance & Intelligence Management System - Neural Mesh OSINT Directory & Embed Viewer">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="obsidian-theme">
+    <!-- Background Canvas Mesh -->
+    <div id="canvas-container">
+        <canvas id="neural-canvas"></canvas>
+    </div>
+
+    <!-- Background Ambient Grid & Glows -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="cyber-grid"></div>
+
+    <!-- Top Navigation HUD -->
+    <header class="hud-header">
+        <div class="hud-brand" id="brand-home-btn" title="Recenter Mesh on Core Node ROSIMS">
+            <div class="brand-logo-icon">
+                <i class="fa-solid fa-diagram-project glow-icon"></i>
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">ROSIMS</span>
+                <span class="brand-subtitle">OSINT Neural Intelligence System</span>
+            </div>
+        </div>
+
+        <div class="hud-stats-bar">
+            <div class="stat-pill"><i class="fa-solid fa-folder-tree"></i> <span id="stat-categories">78</span> Categories</div>
+            <div class="stat-pill"><i class="fa-solid fa-wrench"></i> <span id="stat-tools">1,457</span> Tools</div>
+            <div class="stat-pill active-nodes-pill"><i class="fa-solid fa-circle-nodes"></i> <span id="stat-visible-nodes">1</span> Active Nodes</div>
+        </div>
+
+        <div class="hud-actions">
+            <button class="hud-btn search-trigger-btn" id="open-search-btn" title="Search Tools (Ctrl+K)">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="btn-text">Search Tools</span>
+                <kbd>Ctrl K</kbd>
+            </button>
+            <button class="hud-btn" id="open-favs-btn" title="Starred Favorites">
+                <i class="fa-solid fa-star"></i>
+                <span class="btn-text">Favorites</span>
+                <span class="badge-count" id="fav-count">0</span>
+            </button>
+            <button class="hud-btn" id="open-scratchpad-btn" title="Intel Scratchpad Notes">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span class="btn-text">Intel Notes</span>
+            </button>
+            <button class="hud-btn icon-only-btn" id="toggle-help-btn" title="System Info & Legend">
+                <i class="fa-solid fa-circle-info"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Canvas Floating Graph HUD Controls -->
+    <div class="graph-hud-controls">
+        <button class="hud-icon-btn" id="btn-zoom-in" title="Zoom In (+)"><i class="fa-solid fa-plus"></i></button>
+        <button class="hud-icon-btn" id="btn-zoom-out" title="Zoom Out (-)"><i class="fa-solid fa-minus"></i></button>
+        <button class="hud-icon-btn" id="btn-reset-view" title="Recenter View"><i class="fa-solid fa-crosshairs"></i></button>
+        <div class="hud-divider"></div>
+        <button class="hud-icon-btn" id="btn-expand-all" title="Expand All Categories"><i class="fa-solid fa-diagram-next"></i></button>
+        <button class="hud-icon-btn" id="btn-collapse-all" title="Collapse All to ROSIMS Root"><i class="fa-solid fa-compress"></i></button>
+        <button class="hud-icon-btn active" id="btn-toggle-physics" title="Toggle Physics Simulation"><i class="fa-solid fa-atom"></i></button>
+    </div>
+
+    <!-- Node Hover Information Tooltip -->
+    <div id="node-tooltip" class="node-tooltip hidden">
+        <div class="tooltip-header">
+            <span class="tooltip-icon" id="tooltip-icon">⚡</span>
+            <span class="tooltip-title" id="tooltip-title">Node Title</span>
+        </div>
+        <div class="tooltip-body">
+            <span class="tooltip-tag" id="tooltip-tag">Category</span>
+            <p class="tooltip-desc" id="tooltip-desc">Click node to expand or inspect.</p>
+        </div>
+        <div class="tooltip-footer">
+            <small id="tooltip-action-hint">Click to expand child nodes</small>
+        </div>
+    </div>
+
+    <!-- Live Search Overlay Modal -->
+    <div id="search-modal" class="modal-overlay hidden">
+        <div class="modal-card search-card">
+            <div class="search-input-header">
+                <i class="fa-solid fa-magnifying-glass search-input-icon"></i>
+                <input type="text" id="search-input" placeholder="Search 1,457 OSINT tools by name, category, domain, or tag..." autocomplete="off">
+                <button class="modal-close-btn" id="close-search-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-filter-pills" id="search-category-filters">
+                <button class="filter-pill active" data-cat="all">All Categories</button>
+                <button class="filter-pill" data-cat="phone">Phone & Contact</button>
+                <button class="filter-pill" data-cat="id">ID & Username</button>
+                <button class="filter-pill" data-cat="social">Social Media</button>
+                <button class="filter-pill" data-cat="domain">Domain & IP</button>
+                <button class="filter-pill" data-cat="dark">Dark Web & Privacy</button>
+                <button class="filter-pill" data-cat="threat">Threat Intel</button>
+            </div>
+            <div class="search-results-container" id="search-results-list">
+                <!-- Search items rendered dynamically -->
+            </div>
+            <div class="modal-footer">
+                <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate, <kbd>Enter</kbd> to view, <kbd>Esc</kbd> to close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Tool Viewer Side Drawer -->
+    <div id="viewer-drawer" class="viewer-drawer hidden">
+        <div class="drawer-header">
+            <div class="drawer-title-group">
+                <span class="drawer-icon" id="viewer-icon">🔧</span>
+                <div>
+                    <h2 class="drawer-title" id="viewer-title">Tool Title</h2>
+                    <div class="drawer-meta">
+                        <span class="badge" id="viewer-category">Category</span>
+                        <span class="url-text" id="viewer-url-display">https://example.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-action-btns">
+                <button class="drawer-btn" id="viewer-fav-btn" title="Bookmark Tool"><i class="fa-regular fa-star"></i></button>
+                <button class="drawer-btn" id="viewer-copy-btn" title="Copy Direct URL"><i class="fa-regular fa-copy"></i></button>
+                <a href="#" id="viewer-launch-link" target="_blank" class="drawer-btn highlight-btn" title="Open Tool in New Window">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Site
+                </a>
+                <button class="drawer-btn" id="viewer-expand-btn" title="Toggle Fullscreen View"><i class="fa-solid fa-expand"></i></button>
+                <button class="drawer-btn" id="viewer-close-btn" title="Close Drawer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+
+        <!-- External Quick OSINT Helper Links Bar -->
+        <div class="osint-quick-bar">
+            <span class="quick-bar-label"><i class="fa-solid fa-bolt"></i> Quick OSINT Lookups:</span>
+            <a href="#" id="osint-wayback" target="_blank" class="quick-link-btn" title="Wayback Machine Snapshots"><i class="fa-solid fa-box-archive"></i> Wayback</a>
+            <a href="#" id="osint-whois" target="_blank" class="quick-link-btn" title="WHOIS Domain Lookup"><i class="fa-solid fa-network-wired"></i> WHOIS</a>
+            <a href="#" id="osint-urlscan" target="_blank" class="quick-link-btn" title="URLScan.io Analysis"><i class="fa-solid fa-radar"></i> URLScan</a>
+            <a href="#" id="osint-virustotal" target="_blank" class="quick-link-btn" title="VirusTotal Scan"><i class="fa-solid fa-shield-cat"></i> VirusTotal</a>
+            <button id="insert-note-btn" class="quick-link-btn note-add-btn" title="Add Tool Reference to Intel Notes"><i class="fa-solid fa-plus"></i> Add to Notes</button>
+        </div>
+
+        <!-- Embedded iFrame Viewer Container -->
+        <div class="iframe-container">
+            <div class="iframe-loader" id="iframe-loader">
+                <div class="cyber-spinner"></div>
+                <p>Loading embedded OSINT portal...</p>
+            </div>
+            
+            <div class="iframe-fallback-banner hidden" id="iframe-fallback">
+                <div class="fallback-content">
+                    <i class="fa-solid fa-shield-halved fallback-icon"></i>
+                    <h3>Embedding Restricted by Site Policy</h3>
+                    <p>This OSINT service uses security headers (<code>X-Frame-Options</code> or <code>Content-Security-Policy</code>) that restrict direct iframe embedding.</p>
+                    <div class="fallback-actions">
+                        <a href="#" id="fallback-open-btn" target="_blank" class="cyber-btn primary-cyber-btn">
+                            <i class="fa-solid fa-external-link"></i> Launch Directly in New Tab
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <iframe id="tool-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+        </div>
+    </div>
+
+    <!-- Intel Investigation Notes Drawer -->
+    <div id="scratchpad-drawer" class="side-drawer hidden">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-pen-to-square"></i> Intel Investigation Scratchpad</h3>
+            <button class="drawer-btn" id="close-scratchpad-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="scratchpad-body">
+            <p class="notes-hint">Record case notes, tool findings, target identifiers, and evidence snippets. Auto-saved locally.</p>
+            <textarea id="intel-notes-input" placeholder="Type investigation log notes here...&#10;&#10;e.g. Target Username: @johndoe_osint&#10;Key Tools Used: CyberChef, Epieos, Spiderfoot&#10;Findings: ..."></textarea>
+        </div>
+        <div class="scratchpad-footer">
+            <button class="cyber-btn" id="export-notes-btn"><i class="fa-solid fa-download"></i> Export (.txt)</button>
+            <button class="cyber-btn danger-btn" id="clear-notes-btn"><i class="fa-solid fa-trash-can"></i> Clear</button>
+        </div>
+    </div>
+
+    <!-- Starred Favorites Drawer -->
+    <div id="favs-drawer" class="side-drawer hidden">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-star"></i> Pinned OSINT Favorites</h3>
+            <button class="drawer-btn" id="close-favs-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="favs-body" id="favs-list-container">
+            <!-- Dynamically populated favorites -->
+        </div>
+    </div>
+
+    <!-- System Help & Legend Modal -->
+    <div id="help-modal" class="modal-overlay hidden">
+        <div class="modal-card help-card">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-circle-info"></i> ROSIMS Navigation & Guide</h2>
+                <button class="modal-close-btn" id="close-help-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <h3><i class="fa-solid fa-diagram-project"></i> How Neural Mesh Works:</h3>
+                <ul>
+                    <li><strong>Center Core Node (ROSIMS):</strong> Click to expand or collapse all 78 OSINT category nodes.</li>
+                    <li><strong>Category Nodes (Cyan Orbs):</strong> Click a category node to blossom all tools contained under that category.</li>
+                    <li><strong>Tool Nodes (Emerald Sparks):</strong> Click any tool node to launch the interactive embedded website viewer drawer.</li>
+                    <li><strong>Drag & Pan:</strong> Click and drag empty space to pan the camera view. Scroll mouse wheel to zoom in and out. Drag any node to re-position it.</li>
+                </ul>
+                <h3><i class="fa-solid fa-keyboard"></i> Shortcut Keys:</h3>
+                <ul>
+                    <li><kbd>Ctrl</kbd> + <kbd>K</kbd> : Open Instant Tool Search Engine</li>
+                    <li><kbd>Esc</kbd> : Close Modals and Drawers</li>
+                    <li><kbd>Space</kbd> / <kbd>R</kbd> : Recenter Graph View to ROSIMS Core</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="cyber-btn primary-cyber-btn" id="help-dismiss-btn">Got it, let's investigate!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Data & Application Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
