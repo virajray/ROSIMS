@@ -1048,7 +1048,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-8",
     "name": "DOWNLOADER",
-    "icon": "⚡",
+    "icon": "⬇",
     "count": 9,
     "tools": [
       {
@@ -1662,7 +1662,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-12",
     "name": "WEATHER",
-    "icon": "⚡",
+    "icon": "🌦",
     "count": 4,
     "tools": [
       {
@@ -1992,7 +1992,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-18",
     "name": "ANALYTICS",
-    "icon": "⚡",
+    "icon": "📊",
     "count": 10,
     "tools": [
       {
@@ -2858,7 +2858,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-25",
     "name": "FACEBOOK",
-    "icon": "⚡",
+    "icon": "🔵",
     "count": 16,
     "tools": [
       {
@@ -3210,7 +3210,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-27",
     "name": "YOUTUBE",
-    "icon": "⚡",
+    "icon": "🔴",
     "count": 17,
     "tools": [
       {
@@ -3320,7 +3320,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-28",
     "name": "REDDIT",
-    "icon": "⚡",
+    "icon": "🟠",
     "count": 34,
     "tools": [
       {
@@ -4126,7 +4126,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-38",
     "name": "STEAM",
-    "icon": "⚡",
+    "icon": "🔵",
     "count": 3,
     "tools": [
       {
@@ -4222,7 +4222,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-41",
     "name": "BOT",
-    "icon": "⚡",
+    "icon": "🤖",
     "count": 5,
     "tools": [
       {
@@ -4260,7 +4260,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-42",
     "name": "BLOG",
-    "icon": "⚡",
+    "icon": "📝",
     "count": 4,
     "tools": [
       {
@@ -4292,7 +4292,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-43",
     "name": "NEWS",
-    "icon": "⚡",
+    "icon": "📰",
     "count": 23,
     "tools": [
       {
@@ -5430,7 +5430,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-48",
     "name": "FLIGHT TRACKER",
-    "icon": "⚡",
+    "icon": "✈️",
     "count": 10,
     "tools": [
       {
@@ -5498,7 +5498,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-49",
     "name": "MARITIME",
-    "icon": "⚡",
+    "icon": "🛥️",
     "count": 19,
     "tools": [
       {
@@ -6724,7 +6724,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-59",
     "name": "RADIO",
-    "icon": "⚡",
+    "icon": "📻",
     "count": 18,
     "tools": [
       {
@@ -6840,7 +6840,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-60",
     "name": "REAL ESTATE",
-    "icon": "⚡",
+    "icon": "🏨",
     "count": 10,
     "tools": [
       {
@@ -7908,7 +7908,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-69",
     "name": "BUSINESS",
-    "icon": "⚡",
+    "icon": "🏭",
     "count": 27,
     "tools": [
       {
@@ -8078,7 +8078,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-70",
     "name": "POLICE / LE / FED",
-    "icon": "⚡",
+    "icon": "🚓",
     "count": 43,
     "tools": [
       {
@@ -8344,7 +8344,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-71",
     "name": "[CAN] POLICE",
-    "icon": "⚡",
+    "icon": "🚔",
     "count": 4,
     "tools": [
       {
@@ -8376,7 +8376,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-72",
     "name": "INFORMANT",
-    "icon": "⚡",
+    "icon": "👤",
     "count": 3,
     "tools": [
       {
@@ -8402,7 +8402,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-73",
     "name": "SEX OFFENDER",
-    "icon": "⚡",
+    "icon": "👤",
     "count": 11,
     "tools": [
       {
@@ -8476,7 +8476,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-74",
     "name": "RESIDENT DATABASE",
-    "icon": "🪪",
+    "icon": "🏠",
     "count": 5,
     "tools": [
       {
@@ -8792,7 +8792,7 @@ const ROSIMS_DATA = [
   {
     "id": "cat-76",
     "name": "GOVERNMENT",
-    "icon": "⚡",
+    "icon": "🏢",
     "count": 48,
     "tools": [
       {
