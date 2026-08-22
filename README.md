@@ -1,8 +1,8 @@
 # ROSIMS
 
-> **Research, Observation, Surveillance & Intelligence Management System (ROSIMS)** — An all-in-one OSINT platform for research, investigations, intelligence management, entity correlation, and interactive Node visualization.
+ **Research, Observation, Surveillance & Intelligence Management System (ROSIMS)** — An all-in-one OSINT platform for research, investigations, intelligence management, entity correlation, and interactive Node visualization.
 
----
+
 
 ## 🛰️ Overview & Core Concept
 
@@ -10,7 +10,7 @@
 
 By structuring 1,457 OSINT tools and services into a **dynamic 2D physics-assisted Neural Mesh Network**, ROSIMS transforms fragmented bookmark collections into an active tactical intelligence ecosystem. Analysts can rapidly traverse intelligence categories, blossom target sub-tools, inspect live target domains, and maintain real-time investigation case logs.
 
----
+
 
 ## 🌟 Core Features & Operational Capabilities
 
@@ -33,11 +33,11 @@ By structuring 1,457 OSINT tools and services into a **dynamic 2D physics-assist
 - **Investigation Scratchpad**: Integrated case logger persisted in `localStorage`. One-click insertion of active tool links, target identifiers, and evidence snippets, with one-click `.txt` case report export.
 - **Pinned Favorites Drawer**: Bookmark frequently used OSINT tools for rapid tactical access during active investigations.
 
----
+
 
 ## 📁 System Architecture
 
-```
+
 ROSIMS/
 ├── index.html                   # Main interface, glassmorphic HUD, & drawer layouts
 ├── style.css                    # Obsidian Dark design system & neon cyber styling
@@ -45,9 +45,9 @@ ROSIMS/
 ├── app.js                       # 2D Canvas Neural Mesh engine & application logic
 ├── parse_html.py                # Intelligence dataset extraction script
 └── README.md                    # System documentation
-```
 
----
+
+
 
 ## 🚀 Installation & Operating Guide
 
@@ -59,7 +59,7 @@ python -m http.server 8080
 ```
 Access the application interface at **`http://localhost:8080`**.
 
----
+
 
 ## ⌨️ Keyboard Shortcuts & Navigation Controls
 
@@ -71,7 +71,7 @@ Access the application interface at **`http://localhost:8080`**.
 | <kbd>Mouse Drag</kbd> | Pan Camera / Move Graph Nodes |
 | <kbd>Scroll Wheel</kbd> | Zoom In / Zoom Out Neural Mesh |
 
----
+
 
 ## 🛡️ Operational Mandate
 
